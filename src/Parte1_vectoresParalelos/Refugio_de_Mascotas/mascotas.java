@@ -4,21 +4,20 @@ public class mascotas {
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
 
-        int[] especies = new int [15];
-        int[] edades = new int[15];
+        int[] especies = new int [1];
+        int[] edades = new int[1];
 
-        String[] codigos = new String[15];
-        String[] nombres = new String[15];
+        String[] codigos = new String[1];
+        String[] nombres = new String[1];
 
-        boolean[] disponible = new boolean[15];
-        boolean[] vacunado = new boolean[15];
+        boolean[] disponible = new boolean[1];
+        boolean[] vacunado = new boolean[1];
 
-        for(int i = 0; i<15; i++){
+        for(int i = 0; i<1; i++){
             disponible[i] = true;
 
             System.out.print("Digite el codigo de su mascota #" + i + ": ");
             codigos[i] = sc.nextLine();
-            sc.next();
             System.out.print("Digite el nombre de su mascota #" + i + ": ");
             nombres[i] = sc.nextLine();
             sc.next();
@@ -50,13 +49,15 @@ public class mascotas {
         System.out.print("Seleccione una opción: ");
 
         opcion = sc.nextInt();
-        sc.nextLine(); // Limpiar el buffer de entrada
+        sc.nextLine();
 
-        // Evaluar la opción seleccionada
         switch (opcion) {
             case 1:
-                System.out.println("\n[Acción] Consultando mascotas disponibles...");
-                // Aquí llamarías a tu lógica o método de consulta (Punto 5)
+                for(int i = 0; i < 1; i++){
+                        if(vacunado[i] == true){
+                            System.out.println(nombres[0]);
+                        }
+                }
                 break;
             case 2:
                 System.out.println("\n[Acción] Registrando vacunación...");
