@@ -37,11 +37,42 @@ public class mascotas {
             vacunado[i] = sc.nextBoolean();
             System.out.print("\n");
 
-            // hola
-
-
+                if(edades[i] < 3 || vacunado[i] == false) {
+                    disponible[i] = false;
+                }
         }
+        int opcion = 0;
+        System.out.println("\n--- MENÚ GESTIÓN DE MASCOTAS ---");
+        System.out.println("1. Consultar mascotas disponibles");
+        System.out.println("2. Registrar una vacunación");
+        System.out.println("3. Realizar una adopción");
+        System.out.println("4. Terminar");
+        System.out.print("Seleccione una opción: ");
 
+        opcion = sc.nextInt();
+        sc.nextLine(); // Limpiar el buffer de entrada
+
+        // Evaluar la opción seleccionada
+        switch (opcion) {
+            case 1:
+                System.out.println("\n[Acción] Consultando mascotas disponibles...");
+                // Aquí llamarías a tu lógica o método de consulta (Punto 5)
+                break;
+            case 2:
+                System.out.println("\n[Acción] Registrando vacunación...");
+                // Aquí llamarías a tu lógica de búsqueda y vacunación (Punto 3)
+                break;
+            case 3:
+                System.out.println("\n[Acción] Realizando adopción...");
+                // Aquí llamarías a tu lógica de validación y adopción (Punto 4)
+                break;
+            case 4:
+                System.out.println("\nFinalizando programa. ¡Generando reporte final!");
+                // Aquí mostrarías las estadísticas finales (Puntos 6 y 7)
+                break;
+            default:
+                System.out.println("\nOpción inválida. Intente de nuevo.");
+        }
 
 
 
