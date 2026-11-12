@@ -37,6 +37,8 @@ public class mascotas {
             vacunado[i] = sc.nextBoolean();
             System.out.print("\n");
 
+            // hola
+
 
         }
 
