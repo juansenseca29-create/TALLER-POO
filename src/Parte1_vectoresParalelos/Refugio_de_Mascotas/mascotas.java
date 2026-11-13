@@ -14,6 +14,7 @@ public class mascotas {
         boolean[] vacunado = {true, true, true, false, false, false, false, false, false, false, false, false, false, false, false};
         boolean[] disponible = {true, true, true, true, false, false, false, false, false, false, false, false, false, false, false};
         int cantDisponibles = 4;
+        int totalRegistradas = 4; // posiciones ocupadas en los arreglos
 
 
         // ===== Numeral 2: menú =====
@@ -54,8 +55,8 @@ public class mascotas {
 
                 case 2:
                     System.out.println("\n --- MASCOTAS DISPONIBLES PARA VACUNACION ---");
-                    for(int i = 0; i < cantDisponibles; i++){
-                        if(!vacunado[i]){
+                    for(int i = 0; i < totalRegistradas; i++){
+                        if(!vacunado[i] && disponible[i]){
                             System.out.println("Código: " + codigos[i]
                                     + " | Nombre: " + nombres[i]);
                         }
@@ -69,8 +70,8 @@ public class mascotas {
                     break;
                 case 3:
                     System.out.println("\n--- MASCOTAS DISPONIBLES PARA ADOPTAR ---");
-                    for(int i = 0; i < cantDisponibles; i++){
-                        if(edades[i] >= 3 && vacunado[i] == true){
+                    for(int i = 0; i < totalRegistradas; i++){
+                        if(disponible[i] && edades[i] >= 3 && vacunado[i] == true){
                             String especie = (especies[i] == 1) ? "Perro" : "Gato";
                             String vacuna = vacunado[i] ? "Sí" : "No";
                             System.out.println("Código: " + codigos[i]
@@ -90,38 +91,41 @@ public class mascotas {
 
                     break;
                 case 4:
-
-                    for (int i = cantDisponibles; i < cantDisponibles + 1; i++) {
-                        System.out.print("Digite el codigo de la mascota #" + (i + 1) + ": ");
-                        codigos[i] = sc.nextInt();
-
-                        System.out.print("Digite el nombre de la mascota #" + (i + 1) + ": ");
-                        nombres[i] = sc.nextLine();
-                        sc.next();
-
-                        System.out.print("Digite la especie (1:Perro 2:Gato): ");
-                        especies[i] = sc.nextInt();
-
-                        while (especies[i] != 1 && especies[i] != 2) {
-                            System.out.print("Especie inválida. Digite 1 o 2: ");
-                            especies[i] = sc.nextInt();
-                        }
-
-                        System.out.print("Digite la edad en meses: ");
-                        edades[i] = sc.nextInt();
-                        while (edades[i] <= 0) {
-                            System.out.print("La edad debe ser mayor que 0. Digite la edad: ");
-                            edades[i] = sc.nextInt();
-                        }
-
-                        System.out.print("¿Está vacunada? (true/false): ");
-                        vacunado[i] = sc.nextBoolean();
-                        sc.nextLine();
-
-                        disponible[i] = true;
-                        System.out.println();
+                    if (totalRegistradas >= TAM) {
+                        System.out.println("El refugio está lleno. No se pueden registrar más mascotas.");
+                        break;
                     }
+
+                    int i = totalRegistradas;
+                    System.out.print("Digite el codigo de la mascota #" + (i + 1) + ": ");
+                    codigos[i] = sc.nextInt();
+                    sc.nextLine();
+
+                    System.out.print("Digite el nombre de la mascota #" + (i + 1) + ": ");
+                    nombres[i] = sc.nextLine();
+
+                    System.out.print("Digite la especie (1:Perro 2:Gato): ");
+                    especies[i] = sc.nextInt();
+                    while (especies[i] != 1 && especies[i] != 2) {
+                        System.out.print("Especie inválida. Digite 1 o 2: ");
+                        especies[i] = sc.nextInt();
+                    }
+
+                    System.out.print("Digite la edad en meses: ");
+                    edades[i] = sc.nextInt();
+                    while (edades[i] <= 0) {
+                        System.out.print("La edad debe ser mayor que 0. Digite la edad: ");
+                        edades[i] = sc.nextInt();
+                    }
+
+                    System.out.print("¿Está vacunada? (true/false): ");
+                    vacunado[i] = sc.nextBoolean();
+                    sc.nextLine();
+
+                    disponible[i] = true;
+                    totalRegistradas++;
                     cantDisponibles++;
+                    System.out.println();
 
                     break;
                 default:
