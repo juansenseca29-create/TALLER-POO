@@ -7,14 +7,19 @@ public class mascotas {
 
         final int TAM = 15;
 
-        int []codigos={1, 2, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int []codigos={69, 67, 77, 45, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         String[] nombres = {"pepo", "rayo", "max", "lola", null, null, null, null, null, null, null, null, null, null, null};
         int[] especies = {1, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-        int[] edades = {4, 3, 1, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] edades = {4, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         boolean[] vacunado = {true, true, true, false, false, false, false, false, false, false, false, false, false, false, false};
         boolean[] disponible = {true, true, true, true, false, false, false, false, false, false, false, false, false, false, false};
         int cantDisponibles = 4;
-        int totalRegistradas = 4; // posiciones ocupadas en los arreglos
+        int totalRegistradas = 4;
+
+        int cantPerrosAdop = 0;
+        int cantGatosAdop = 0;
+        int cantVacunados= 3;
+        int cantAdoptados = 0;
 
 
         // ===== Numeral 2: menú =====
@@ -25,7 +30,8 @@ public class mascotas {
             System.out.println("2. Registrar una vacunación");
             System.out.println("3. Realizar una adopción");
             System.out.println("4. Registrar mascota nueva");
-            System.out.println("5. Terminar");
+            System.out.println("5. Realizar busqueda por especie y edad máxima");
+            System.out.println("6. Terminar");
             System.out.print("Seleccione una opción: ");
 
             opcion = sc.nextInt();
@@ -61,13 +67,28 @@ public class mascotas {
                                     + " | Nombre: " + nombres[i]);
                         }
                     }
-                    int codigo = 0;
-                    System.out.println("Digite el código de la mascota que desea vacunar?: ");
-                    codigo = sc.nextInt();
-                    vacunado[codigo - 1] = true;
-                    System.out.println("Registro de vacunación realizado de " + nombres[codigo - 1]);
 
+                    System.out.print("\nDigite el código de la mascota que desea vacunar: ");
+                    int codigo = sc.nextInt();
+                    int posicion = -1;
+                    for(int i = 0; i < totalRegistradas; i ++){
+                        if(codigos[i] == codigo){
+                            posicion = i;
+                            vacunado[posicion] = true;
+                        }
+                    }
+                    if(posicion == -1){
+                        System.out.println("El codigo digitado no corresponde a ninguna mascota");
+                    }else{
+                        System.out.println("Registro de vacunación realizado de " + nombres[posicion]);
+                    }
+
+                    if(vacunado[posicion])
+                        cantVacunados++;
+
+                    // ---------------------------------------------------------------------------------------
                     break;
+
                 case 3:
                     System.out.println("\n--- MASCOTAS DISPONIBLES PARA ADOPTAR ---");
                     for(int i = 0; i < totalRegistradas; i++){
@@ -81,14 +102,35 @@ public class mascotas {
                                     + " | Vacunada: " + vacuna);
                         }
                     }
-                    int codigoParaAdoptar = 0;
+
                     System.out.print("Digite el codigo de la mascota que desea adoptar: ");
-                    codigoParaAdoptar = sc.nextInt();
-                    disponible[codigoParaAdoptar - 1] = false;
-                    if(disponible[codigoParaAdoptar - 1] == false){
-                        cantDisponibles -= 1;
+                    int codigoParaAdoptar = sc.nextInt();
+                    int posAdoptar = -1;
+
+                    for(int i = 0; i < totalRegistradas; i++){
+                        if(codigos[i] == codigoParaAdoptar){
+                            posAdoptar = i;
+                            disponible[posAdoptar] = false;
+                        }
+                    }
+                    if(posAdoptar == -1){
+                        System.out.println("El codigo digitado no corresponde a ninguna mascota disponible para adoptar");
+                    }else{
+                        System.out.println("Adocpión realizada con exito!");
                     }
 
+                    if(!disponible[posAdoptar]){
+                        if(especies[posAdoptar] == 1){
+                            cantPerrosAdop++;
+                        }else{
+                            cantGatosAdop++;
+                        }
+                    }
+
+                    cantDisponibles--;
+                    cantAdoptados++;
+
+                    //---------------------------------------------------------------------------------------------
                     break;
                 case 4:
                     if (totalRegistradas >= TAM) {
@@ -128,10 +170,61 @@ public class mascotas {
                     System.out.println();
 
                     break;
+                case 5:
+                    System.out.print("\nDigite la especie que desea buscar (1: Perro | 2: Gato): ");
+                    int especieBuscada = sc.nextInt();
+
+                    System.out.print("Digite la edad máxima (en meses): ");
+                    int edadMaxima = sc.nextInt();
+
+                    boolean encontro = false;
+                    System.out.println("\n--- RESULTADOS DE BÚSQUEDA ---");
+                    for (int j = 0; j < totalRegistradas; j++) {
+                        if (especies[j] == especieBuscada && edades[j] <= edadMaxima) {
+                            String especie = (especies[j] == 1) ? "Perro" : "Gato";
+                            String vacuna = vacunado[j] ? "Sí" : "No";
+                            System.out.println("Código: " + codigos[j]
+                                    + " | Nombre: " + nombres[j]
+                                    + " | Especie: " + especie
+                                    + " | Edad: " + edades[j] + " meses"
+                                    + " | Vacunada: " + vacuna);
+                            encontro = true;
+                        }
+                    }
+
+                    if (!encontro) {
+                        System.out.println("No se encontraron mascotas que cumplan los criterios.");
+                    }
+                    break;
+                case 6:
+                    System.out.println("\n--- REPORTE DE ACCIONES ---");
+                    System.out.println("Perros adoptados: " + cantPerrosAdop);
+                    System.out.println("Gatos adoptados: " + cantGatosAdop);
+                    System.out.println("Hay " + cantDisponibles + " mascotas disponibles, de las cuales "
+                    + (cantDisponibles - cantVacunados) + " aun no estan vacunadas");
+
+                    int posEdadMayor = 0;
+                    int edadMayor = 0;
+                    for(int j = 0; j < totalRegistradas; j++){
+                        if(edades[j] > edadMayor){
+                            edadMayor = edades[j];
+                            posEdadMayor = j;
+                        }
+                    }
+
+                    System.out.println("\nLa mascota(s) con mayor edad: ");
+                    for(int j = 0; j < totalRegistradas; j++){
+                        if(edades[j] == edadMayor){
+                            System.out.println("Nombre: " + nombres[j] + " | Edad: " + edades[j] + " meses");
+                        }
+                    }
+
+                    System.out.println("\nEl porcentaje de mascotas adoptadas es: " + ( (float)cantAdoptados / (float)totalRegistradas) * 100);
+                    break;
                 default:
-                    System.out.println("\nOpción inválida. Intente de nuevo.");
+                    System.out.println("\nOpcion invalida, digite una opcion correcta ");
             }
-        } while (opcion != 5);
+        } while (opcion != 6);
 
         sc.close();
     }
