@@ -2,14 +2,20 @@ package Parte2_VectoresDeObjetos.Papalotes;
 
 public class Articulo {
 
-    int clave;
-    double costoMP;
+    private int clave;
+    private double costoMP;
 
     public Articulo(int clave, double costoMP){
         this.clave = clave;
         this.costoMP = costoMP;
     }
 
+    public int getClave(){
+        return clave;
+    }
+    public double getCostoMP(){
+        return costoMP;
+    }
     public double getManoDeObra(){
         return switch (clave) {
             case 3, 4: yield costoMP * 0.75;
