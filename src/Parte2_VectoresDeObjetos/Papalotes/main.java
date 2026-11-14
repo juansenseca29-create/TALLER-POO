@@ -60,6 +60,16 @@ public class main {
             }
         }
 
+        double articuloMasCaro = 0;
+        int posArticuloMasCaro = 0;
+        for(int i = 0; i < cantArticulos; i++){
+            if(articulos[i].getPrecioDeVenta() > articuloMasCaro){
+                articuloMasCaro =  articulos[i].getPrecioDeVenta();
+                posArticuloMasCaro = i;
+            }
+        }
+
+        System.out.printf("Articulo mas caro: #%d PV= %.2f%n", (posArticuloMasCaro + 1), articuloMasCaro);
 
 
 
