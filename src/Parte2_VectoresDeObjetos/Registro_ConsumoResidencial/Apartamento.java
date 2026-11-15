@@ -14,6 +14,7 @@ public class Apartamento {
         this.consumoAgua = consumoAgua;
         this.consumoEnergia = consumoEnergia;
     }
+
     // ===== GETTERS =====
     public int getNumero() {
         return numero;
@@ -30,6 +31,7 @@ public class Apartamento {
     public double getConsumoEnergia() {
         return consumoEnergia;
     }
+
     // ===== TARIFAS (abstracción) =====
     public double obtenerTarifaAgua() {
         if (tipo == 1) {
@@ -54,6 +56,7 @@ public class Apartamento {
             return 0;
         }
     }
+
     // ===== CÁLCULOS =====
     public double calcularValorAgua() {
         return consumoAgua * obtenerTarifaAgua();
@@ -65,5 +68,10 @@ public class Apartamento {
 
     public double calcularFacturaTotal() {
         return calcularValorAgua() + calcularValorEnergia();
+    }
+
+    // ===== VALIDACIÓN =====
+    public boolean tieneConsumoCero() {
+        return consumoAgua == 0 && consumoEnergia == 0;
     }
 }
