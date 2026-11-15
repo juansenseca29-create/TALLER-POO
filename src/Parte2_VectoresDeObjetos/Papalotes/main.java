@@ -52,7 +52,7 @@ public class main {
 
         for(int i = 0; i < 6; i++){
             if(contadorPorClave[i] > 0){
-                System.out.print("El promedio del Precio de venta de (Clave "+ (i+1)+ "): ");
+                System.out.print("\nEl promedio del Precio de venta de (Clave "+ (i+1)+ "): ");
                 System.out.printf("%.2f", (sumatoriaPorClave[i]/contadorPorClave[i]) );
                 System.out.println(" ");
             }else{
@@ -60,7 +60,7 @@ public class main {
             }
         }
 
-        double articuloMasCaro = 0;
+        double articuloMasCaro = Double.MIN_VALUE;
         int posArticuloMasCaro = 0;
         for(int i = 0; i < cantArticulos; i++){
             if(articulos[i].getPrecioDeVenta() > articuloMasCaro){
@@ -68,9 +68,17 @@ public class main {
                 posArticuloMasCaro = i;
             }
         }
-
         System.out.printf("Articulo mas caro: #%d PV= %.2f%n", (posArticuloMasCaro + 1), articuloMasCaro);
 
+        double articuloMasBarato = Double.MAX_VALUE;
+        int posArticuloMasBarato = 0;
+        for(int i = 0; i < cantArticulos; i++){
+            if(articulos[i].getPrecioDeVenta() < articuloMasBarato){
+                articuloMasBarato =  articulos[i].getPrecioDeVenta();
+                posArticuloMasBarato = i;
+            }
+        }
+        System.out.printf("Articulo mas Barato: #%d PV= %.2f%n", (posArticuloMasBarato + 1), articuloMasBarato);
 
 
     }
