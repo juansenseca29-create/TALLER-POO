@@ -74,4 +74,20 @@ public class Apartamento {
     public boolean tieneConsumoCero() {
         return consumoAgua == 0 && consumoEnergia == 0;
     }
+
+    // ===== VALORES ALEATORIOS PARA PRECARGAR DATOS (static) =====
+    public static int getTipoRandom() {
+        int tipoRandom = (int) (Math.random() * 3 + 1);                 // 1 a 3
+        return tipoRandom;
+    }
+
+    public static double getConsumoAguaRandom() {
+        int aguaRandom = (int) (Math.random() * (30 - 5 + 1) + 5);      // 5 a 30 m³
+        return aguaRandom;
+    }
+
+    public static double getConsumoEnergiaRandom() {
+        int energiaRandom = (int) (Math.random() * (400 - 50 + 1) + 50); // 50 a 400 kWh
+        return energiaRandom;
+    }
 }
