@@ -19,12 +19,13 @@ public class main {
         System.out.print("Cuantos articulos desea ingresar: ");
         cantArticulos = sc.nextInt();
 
-        for(int i = 0; i < cantArticulos; i++){
 
-            if(cantArticulos > 40 - cantArticulosPreCargados){
-                System.out.println("El numero de articulos que desea registrar supera el limite permitido");
-                break;
-            }else {
+        while(cantArticulos > 40 - cantArticulosPreCargados){
+            System.out.print("El numero de articulos que desea registrar supera el limite permitido, ingrese uno inferior: ");
+            cantArticulos = sc.nextInt();
+        }
+
+        for(int i = 0; i < cantArticulos; i++){
                 System.out.print("\nDigite la clave de su producto (1-6): ");
                 int clav = sc.nextInt();
                 if(clav < 1 || clav > 6) {
@@ -36,7 +37,7 @@ public class main {
                 double costMP = sc.nextDouble();
                 articulos[cantArticulosPreCargados + i] = new Articulo(clav, costMP);
             }
-        }
+
 
         System.out.println("\n---------------------------------ARTICULOS REGISTRADOS---------------------------------------");
         System.out.printf("\n%-3s %-8s %-10s %-15s %-18s %-18s %-8s%n",
