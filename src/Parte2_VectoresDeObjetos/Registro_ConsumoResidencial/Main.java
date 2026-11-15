@@ -7,7 +7,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         // ===== ARREGLO DE OBJETOS =====
-        Apartamento[] edificio = new Apartamento[3];
+        Apartamento[] edificio = new Apartamento[6];
 
         // ===== INGRESO DE DATOS =====
         for (int i = 0; i < edificio.length; i++) {
@@ -117,10 +117,25 @@ public class Main {
             System.out.printf("Factura promedio Estudio (tipo 1):          $%.0f  (%d apto(s))%n", promedioTipo1, cantidadTipo1);
             System.out.printf("Factura promedio Dos habitaciones (tipo 2): $%.0f  (%d apto(s))%n", promedioTipo2, cantidadTipo2);
             System.out.printf("Factura promedio Penthouse (tipo 3):        $%.0f  (%d apto(s))%n", promedioTipo3, cantidadTipo3);
-            System.out.printf("Mayor consumo energético: Apto %d con %.2f kWh%n",
-                    edificio[posMayor].getNumero(), edificio[posMayor].getConsumoEnergia());
-            System.out.printf("Menor consumo energético: Apto %d con %.2f kWh%n",
-                    edificio[posMenor].getNumero(), edificio[posMenor].getConsumoEnergia());
+            // Mayor consumo energético (incluye empates)
+            double consumoMayor = edificio[posMayor].getConsumoEnergia();
+            System.out.printf("Mayor consumo energético (%.2f kWh): Apto(s)", consumoMayor);
+            for (int i = 0; i < edificio.length; i++) {
+                if (edificio[i].getConsumoEnergia() == consumoMayor) {
+                    System.out.print(" " + edificio[i].getNumero());
+                }
+            }
+            System.out.println();
+
+            // Menor consumo energético (incluye empates)
+            double consumoMenor = edificio[posMenor].getConsumoEnergia();
+            System.out.printf("Menor consumo energético (%.2f kWh): Apto(s)", consumoMenor);
+            for (int i = 0; i < edificio.length; i++) {
+                if (edificio[i].getConsumoEnergia() == consumoMenor) {
+                    System.out.print(" " + edificio[i].getNumero());
+                }
+            }
+            System.out.println();
             System.out.printf("Total recaudado por el edificio: $%.0f%n", totalRecaudado);
         }
 
