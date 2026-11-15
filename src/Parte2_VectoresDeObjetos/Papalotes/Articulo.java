@@ -38,5 +38,13 @@ public class Articulo {
     public double getPrecioDeVenta(){
         return (getCostoDeProduccion() * 1.45);
     }
+    public static int getValoresRandomClaves(){
+            int valorRandom = (int)(Math.random() * 6 + 1);
+        return valorRandom;
+    }
+    public static double getValoresRandomCostoMP(){
+        int valorRandomCostMP = (int)(Math.random()*(6000.0 - 2000.0 + 1.0) + 2000.0);
+        return valorRandomCostMP;
+    }
 
 }
