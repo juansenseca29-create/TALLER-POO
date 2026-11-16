@@ -1,13 +1,12 @@
 package Parte2_VectoresDeObjetos.Registro_ConsumoResidencial;
 
 public class Apartamento {
-    // ===== ATRIBUTOS (privados = encapsulados) =====
+
     private int numero;
     private int tipo;
     private double consumoAgua;
     private double consumoEnergia;
 
-    // ===== CONSTRUCTOR COMPLETO =====
     public Apartamento(int numero, int tipo, double consumoAgua, double consumoEnergia) {
         this.numero = numero;
         this.tipo = tipo;
@@ -15,7 +14,6 @@ public class Apartamento {
         this.consumoEnergia = consumoEnergia;
     }
 
-    // ===== GETTERS =====
     public int getNumero() {
         return numero;
     }
@@ -32,7 +30,6 @@ public class Apartamento {
         return consumoEnergia;
     }
 
-    // ===== TARIFAS (abstracción) =====
     public double obtenerTarifaAgua() {
         if (tipo == 1) {
             return 1200;
@@ -57,7 +54,6 @@ public class Apartamento {
         }
     }
 
-    // ===== CÁLCULOS =====
     public double calcularValorAgua() {
         return consumoAgua * obtenerTarifaAgua();
     }
@@ -70,12 +66,10 @@ public class Apartamento {
         return calcularValorAgua() + calcularValorEnergia();
     }
 
-    // ===== VALIDACIÓN =====
     public boolean tieneConsumoCero() {
         return consumoAgua == 0 && consumoEnergia == 0;
     }
 
-    // ===== VALORES ALEATORIOS PARA PRECARGAR DATOS (static) =====
     public static int getTipoRandom() {
         int tipoRandom = (int) (Math.random() * 3 + 1);                 // 1 a 3
         return tipoRandom;

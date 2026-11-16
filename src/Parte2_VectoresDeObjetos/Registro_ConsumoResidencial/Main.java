@@ -6,10 +6,8 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        // ===== ARREGLO DE OBJETOS =====
         Apartamento[] edificio = new Apartamento[20];
 
-        // ===== APARTAMENTOS PRECARGADOS (datos aleatorios) =====
         int cantPrecargados = 5;
         for (int i = 0; i < cantPrecargados; i++) {
             int numero = 101 + i;
@@ -20,7 +18,6 @@ public class Main {
         }
         System.out.println("Se precargaron " + cantPrecargados + " apartamentos (101 a " + (100 + cantPrecargados) + ").");
 
-        // ===== ¿CUÁNTOS APARTAMENTOS MÁS SE VAN A INGRESAR? =====
         int espacioDisponible = edificio.length - cantPrecargados;
         System.out.print("¿Cuántos apartamentos desea ingresar? (0 a " + espacioDisponible + "): ");
         int cantIngresados = sc.nextInt();
@@ -30,10 +27,8 @@ public class Main {
             cantIngresados = 0;
         }
 
-        // Total de apartamentos que realmente tienen datos
         int totalAptos = cantPrecargados + cantIngresados;
 
-        // ===== INGRESO DE DATOS (continúa después de los precargados) =====
         for (int i = cantPrecargados; i < totalAptos; i++) {
             System.out.println("\n--- Apartamento " + (i + 1) + " de " + totalAptos + " ---");
 
@@ -52,7 +47,6 @@ public class Main {
             edificio[i] = new Apartamento(numero, tipo, agua, energia);
         }
 
-        // ===== VALIDACIÓN: ¿TODOS LOS CONSUMOS SON CERO? =====
         int aptosSinConsumo = 0;
         for (int i = 0; i < totalAptos; i++) {
             if (edificio[i].tieneConsumoCero()) {
@@ -65,7 +59,6 @@ public class Main {
             System.out.println("Datos inválidos: no se puede generar el reporte.");
         } else {
 
-            // ===== TABLA DE RESULTADOS =====
             System.out.println("\n================================== REPORTE DE CONSUMOS ==================================");
             System.out.printf("%-6s%-6s%12s%15s%15s%16s%16s%n",
                     "Apto", "Tipo", "Agua (m³)", "Energía (kWh)", "Valor agua", "Valor energía", "Factura total");
@@ -82,7 +75,6 @@ public class Main {
                         edificio[i].calcularFacturaTotal());
             }
 
-            // ===== ESTADÍSTICAS =====
             double totalRecaudado = 0;
 
             double sumaTipo1 = 0;
@@ -98,10 +90,9 @@ public class Main {
             for (int i = 0; i < totalAptos; i++) {
                 double factura = edificio[i].calcularFacturaTotal();
 
-                // Total recaudado
                 totalRecaudado += factura;
 
-                // Acumuladores y contadores por tipo
+
                 if (edificio[i].getTipo() == 1) {
                     sumaTipo1 += factura;
                     cantidadTipo1++;
@@ -113,7 +104,6 @@ public class Main {
                     cantidadTipo3++;
                 }
 
-                // Mayor y menor consumo energético
                 if (edificio[i].getConsumoEnergia() > edificio[posMayor].getConsumoEnergia()) {
                     posMayor = i;
                 }
@@ -122,7 +112,6 @@ public class Main {
                 }
             }
 
-            // Promedios por tipo (evitando dividir entre cero)
             double promedioTipo1 = 0;
             double promedioTipo2 = 0;
             double promedioTipo3 = 0;
@@ -136,13 +125,11 @@ public class Main {
                 promedioTipo3 = sumaTipo3 / cantidadTipo3;
             }
 
-            // ===== MOSTRAR ESTADÍSTICAS =====
             System.out.println("\n========== ESTADÍSTICAS ==========");
             System.out.printf("Factura promedio Estudio (tipo 1):          $%.0f  (%d apto(s))%n", promedioTipo1, cantidadTipo1);
             System.out.printf("Factura promedio Dos habitaciones (tipo 2): $%.0f  (%d apto(s))%n", promedioTipo2, cantidadTipo2);
             System.out.printf("Factura promedio Penthouse (tipo 3):        $%.0f  (%d apto(s))%n", promedioTipo3, cantidadTipo3);
 
-            // Mayor consumo energético (incluye empates)
             double consumoMayor = edificio[posMayor].getConsumoEnergia();
             System.out.printf("Mayor consumo energético (%.2f kWh): Apto(s)", consumoMayor);
             for (int i = 0; i < totalAptos; i++) {
@@ -152,7 +139,6 @@ public class Main {
             }
             System.out.println();
 
-            // Menor consumo energético (incluye empates)
             double consumoMenor = edificio[posMenor].getConsumoEnergia();
             System.out.printf("Menor consumo energético (%.2f kWh): Apto(s)", consumoMenor);
             for (int i = 0; i < totalAptos; i++) {
